@@ -54,7 +54,7 @@ class OTPController extends GetxController {
         preferenceManager.saveUser(response.body.data!);
         print("isRegister $isRegister");
         Get.toNamed(isRegister ? Routes.COMPLETE_REGISTER : Routes.HOME,
-            arguments: isRegister ? [phone, countryCode] : []);
+            arguments: isRegister ? [phone, countryCode, false] : []);
       } else {
         state.networkState.value = NetworkState.ERROR;
         showCustomSnackBar(response.errorMessage, isError: true);

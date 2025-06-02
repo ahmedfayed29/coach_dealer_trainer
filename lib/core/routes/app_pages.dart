@@ -5,8 +5,6 @@ import 'package:coach/features/auth/otp/otp_binding.dart';
 import 'package:coach/features/auth/otp/otp_page.dart';
 import 'package:coach/features/auth/profile/profile_page.dart';
 import 'package:coach/features/choose_lang/choose_lang_page.dart';
-import 'package:coach/features/coaches/coach_details/coach_details_binding.dart';
-import 'package:coach/features/coaches/coach_details/coach_details_page.dart';
 import 'package:coach/features/home/home_binding.dart';
 import 'package:coach/features/home/home_page.dart';
 import 'package:coach/features/notifications/notifications_binding.dart';
@@ -31,8 +29,8 @@ import '../../features/auth/login/login_page.dart';
 import '../../features/auth/profile/profile_binding.dart';
 import '../../features/auth/register/register_binding.dart';
 import '../../features/auth/register/register_page.dart';
-import '../../features/coaches/book_class/book_class_binding.dart';
-import '../../features/coaches/book_class/book_class_page.dart';
+import '../../features/history/history_binding.dart';
+import '../../features/history/history_page.dart';
 import '../../features/splash/splash_binding.dart';
 import '../../features/splash/splash_page.dart';
 
@@ -81,6 +79,7 @@ class AppPages {
       page: () => CompleteRegisterPage(
         phone: Get.arguments[0],
         countryCode: Get.arguments[1],
+        isEdit: Get.arguments[2] ?? false,
       ),
       binding: CompleteRegisterBinding(),
       transition: Transition.native,
@@ -89,6 +88,12 @@ class AppPages {
       name: Routes.HOME,
       page: () => HomePage(),
       binding: HomeBinding(),
+      transition: Transition.native,
+    ),
+    GetPage(
+      name: Routes.HISTORY,
+      page: () => HistoryPage(),
+      binding: HistoryBinding(),
       transition: Transition.native,
     ),
     GetPage(
@@ -143,18 +148,6 @@ class AppPages {
       name: Routes.EDIT_ADDRESS,
       page: () => const EditAddressPage(),
       binding: EditAddressBinding(),
-      transition: Transition.native,
-    ),
-    GetPage(
-      name: Routes.COACH_DETAILS,
-      page: () => const CoachDetailsPage(),
-      binding: CoachDetailsBinding(),
-      transition: Transition.native,
-    ),
-    GetPage(
-      name: Routes.BOOK_CLASS,
-      page: () => const BookClassPage(),
-      binding: BookClassBinding(),
       transition: Transition.native,
     ),
   ];

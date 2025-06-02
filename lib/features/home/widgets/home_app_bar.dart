@@ -11,30 +11,41 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final user = Get.find<PreferenceManager>().getUser();
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        GestureDetector(
-          onTap: () => Get.toNamed(Routes.ACCOUNT),
-          child: CircleAvatar(
-            radius: 20,
-            child: Image.network("${user.image}"),
+    return AppBar(
+      leadingWidth: 70.w,
+      leading: GestureDetector(
+        onTap: () => Get.toNamed(Routes.ACCOUNT),
+        child: Container(
+          width: 40.w,
+          height: 40.h,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: NetworkImage(
+                user.image ?? "",
+              ),
+            ),
           ),
         ),
-        AppText(
-          text: "${"welcome".tr} ${user.name}",
-          color: AppColors.primaryColor,
-          fontSize: 18,
-        ).marginSymmetric(horizontal: 8.w),
-        Spacer(),
-        GestureDetector(
-          onTap: () => Get.toNamed(Routes.NOTIFICATIONS),
-          child: SvgPicture.asset("assets/icons/notification.svg"),
+      ),
+      title: AppText(
+        text: "${"welcome".tr} ${user.name}",
+        color: AppColors.primaryColor,
+        fontSize: 18,
+      ).marginSymmetric(horizontal: 0.w),
+      actions: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          child: GestureDetector(
+            onTap: () => Get.toNamed(Routes.NOTIFICATIONS),
+            child: SvgPicture.asset("assets/icons/notification.svg"),
+          ),
         ),
       ],
-    ).marginSymmetric(horizontal: 16.w);
+    );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(50.0);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

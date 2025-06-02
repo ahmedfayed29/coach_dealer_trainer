@@ -18,6 +18,7 @@ class AuthRepository extends BaseRepository {
   final String _getCountriesEndPoint = '/countries';
   final String _getSportsEndPoint = '/sports';
   final String _profileEndPoint = '/coach/auth/profile';
+  final String _logout = '/coach/auth/logout';
 
   /// Login
   Future<NetworkResponse<GlobalResponse>> login({
@@ -30,6 +31,14 @@ class AuthRepository extends BaseRepository {
       GlobalResponse(),
       _loginEndPoint,
       body: body,
+    );
+  }
+
+  /// Login
+  Future<NetworkResponse<GlobalResponse>> logout() async {
+    return networkHandler.post<GlobalResponse>(
+      GlobalResponse(),
+      _logout,
     );
   }
 

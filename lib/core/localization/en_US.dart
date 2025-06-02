@@ -142,5 +142,11 @@ const Map<String, String> en_US = {
   "wednesday": "Wednesday",
   "thursday": "Thursday",
   "friday": "Friday",
-  "empty_field": "Please fill this field"
+  "empty_field": "Please fill this field",
+  "todays_bookings": "Today’s Bookings",
+  "class_date": "Class Date",
+  "bookings_history": "Bookings History",
+  "rules_and_conditions": "Rules & Conditions",
+  "last_week": "Last Week",
+  "no_bookings": "No Bookings",
 };

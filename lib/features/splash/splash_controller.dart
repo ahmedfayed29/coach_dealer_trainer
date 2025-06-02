@@ -14,8 +14,7 @@ class SplashController extends GetxController {
       if (!preferenceManager.isLoggedIn()) {
         Get.offAllNamed(Routes.LOGIN);
       } else {
-        // Get.offAllNamed(Routes.MAIN_PAGE);
-        Get.offAllNamed(Routes.CHOOSE_LANG);
+        Get.offAllNamed(Routes.HOME);
       }
     }
   }

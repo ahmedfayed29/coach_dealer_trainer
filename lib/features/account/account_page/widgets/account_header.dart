@@ -6,15 +6,24 @@ import '../../../../core/routes/app_pages.dart';
 
 class AccountHeader extends StatelessWidget {
   final String name;
-  final String phone;
+  final String phone, countryCode;
   final String image;
 
-  const AccountHeader({super.key, required this.name, required this.phone, required this.image});
+  const AccountHeader(
+      {super.key,
+      required this.name,
+      required this.phone,
+      required this.image,
+      required this.countryCode});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.PROFILE),
+      onTap: () => Get.toNamed(Routes.COMPLETE_REGISTER, arguments: [
+        phone,
+        countryCode,
+        true,
+      ]),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         decoration: BoxDecoration(

@@ -17,10 +17,10 @@ class UserModel extends BaseMappable {
   dynamic bio;
   int classPeriod;
   CountryModel country;
-  List<dynamic> sports;
-  List<dynamic> images;
-  List<dynamic> workingDays;
-  List<dynamic> shifts;
+  List<SportsModel> sports;
+  List<ImagesModel> images;
+  List<WorkingDaysModel> workingDays;
+  List<ShiftsModel> shifts;
 
   UserModel({
     required this.id,
@@ -58,10 +58,14 @@ class UserModel extends BaseMappable {
         bio: json["bio"],
         classPeriod: int.tryParse(json["class_period"].toString()) ?? 0,
         country: CountryModel.fromJson(json["country"]),
-        sports: List<dynamic>.from(json["sports"].map((x) => x)),
-        images: List<dynamic>.from(json["images"].map((x) => x)),
-        workingDays: List<dynamic>.from(json["working_days"].map((x) => x)),
-        shifts: List<dynamic>.from(json["shifts"].map((x) => x)),
+        sports: List<SportsModel>.from(json["sports"].map((x) {
+          print("x is ${x}");
+          return SportsModel.fromJson(x);
+        })),
+        images: List<ImagesModel>.from(json["images"].map((x) => ImagesModel.fromJson(x))),
+        workingDays: List<WorkingDaysModel>.from(
+            json["working_days"].map((x) => WorkingDaysModel.fromJson(x))),
+        shifts: List<ShiftsModel>.from(json["shifts"].map((x) => ShiftsModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -79,10 +83,10 @@ class UserModel extends BaseMappable {
         "bio": bio,
         "class_period": classPeriod,
         "country": country.toJson(),
-        "sports": List<dynamic>.from(sports.map((x) => x)),
-        "images": List<dynamic>.from(images.map((x) => x)),
-        "working_days": List<dynamic>.from(workingDays.map((x) => x)),
-        "shifts": List<dynamic>.from(shifts.map((x) => x)),
+        "sports": List<SportsModel>.from(sports.map((x) => x)),
+        "images": List<ImagesModel>.from(images.map((x) => x)),
+        "working_days": List<WorkingDaysModel>.from(workingDays.map((x) => x)),
+        "shifts": List<ShiftsModel>.from(shifts.map((x) => x)),
       };
 
   @override
@@ -101,9 +105,93 @@ class UserModel extends BaseMappable {
         bio: json["bio"],
         classPeriod: json["class_period"],
         country: CountryModel.fromJson(json["country"]),
-        sports: List<dynamic>.from(json["sports"].map((x) => x)),
-        images: List<dynamic>.from(json["images"].map((x) => x)),
-        workingDays: List<dynamic>.from(json["working_days"].map((x) => x)),
-        shifts: List<dynamic>.from(json["shifts"].map((x) => x)),
+        sports: List<SportsModel>.from(json["sports"].map((x) => x)),
+        images: List<ImagesModel>.from(json["images"].map((x) => x)),
+        workingDays: List<WorkingDaysModel>.from(json["working_days"].map((x) => x)),
+        shifts: List<ShiftsModel>.from(json["shifts"].map((x) => x)),
       );
+}
+
+class SportsModel {
+  int id;
+  String name;
+  String price;
+
+  SportsModel({
+    required this.id,
+    required this.name,
+    required this.price,
+  });
+
+  factory SportsModel.fromJson(Map<String, dynamic> json) => SportsModel(
+        id: json["id"],
+        name: json["name"],
+        price: json["price"].toString(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "price": price,
+      };
+}
+
+class ShiftsModel {
+  int id;
+  String startTime;
+  String endTime;
+
+  ShiftsModel({
+    required this.id,
+    required this.startTime,
+    required this.endTime,
+  });
+
+  factory ShiftsModel.fromJson(Map<String, dynamic> json) => ShiftsModel(
+        id: json["id"],
+        startTime: json["start_time"],
+        endTime: json["end_time"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "start_time": startTime,
+        "end_time": endTime,
+      };
+}
+
+class WorkingDaysModel {
+  String day;
+
+  WorkingDaysModel({
+    required this.day,
+  });
+
+  factory WorkingDaysModel.fromJson(Map<String, dynamic> json) => WorkingDaysModel(
+        day: json["day"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "day": day,
+      };
+}
+
+class ImagesModel {
+  int id;
+  String url;
+
+  ImagesModel({
+    required this.id,
+    required this.url,
+  });
+
+  factory ImagesModel.fromJson(Map<String, dynamic> json) => ImagesModel(
+        id: json["id"],
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "url": url,
+      };
 }

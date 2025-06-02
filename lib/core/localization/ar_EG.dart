@@ -120,5 +120,11 @@ const Map<String, String> ar_EG = {
   "wednesday": "الأربعاء",
   "thursday": "الخميس",
   "friday": "الجمعة",
-  "empty_field": "يرجى ملء هذا الحقل"
+  "empty_field": "يرجى ملء هذا الحقل",
+  "todays_bookings": "حجوزات اليوم",
+  "class_date": "تاريخ الحصة",
+  "bookings_history": "سجل الحجوزات",
+  "rules_and_conditions": "الشروط والأحكام",
+  "last_week": " الأسبوع الماضي",
+  "no_bookings": "لا توجد حجوزات",
 };

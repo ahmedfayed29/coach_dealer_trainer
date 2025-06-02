@@ -28,29 +28,18 @@ class AccountPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20),
         children: [
           AccountHeader(
-            name: user.name!,
-            phone: "+${user.fullPhone!}",
-            image: user.image!,
+            name: user.name,
+            countryCode: user.countryCode,
+            phone: "+${user.fullPhone}",
+            image: user.image,
           ),
           DetailsContainer(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MenuItem(
-                  title: "booking_and_subscriptions".tr,
-                  onTap: () {},
-                ),
-                MenuItem(
-                  title: "store_orders".tr,
-                  onTap: () {},
-                ),
-                MenuItem(
-                  title: "favorites".tr,
-                  onTap: () {},
-                ),
-                MenuItem(
-                  title: "my_address".tr,
-                  onTap: () => Get.toNamed(Routes.MY_ADDRESSES),
+                  title: "bookings_history".tr,
+                  onTap: () => Get.toNamed(Routes.HISTORY),
                 ),
                 MenuItem(
                   title: "settings".tr,
@@ -84,7 +73,7 @@ class AccountPage extends StatelessWidget {
                 )
               ],
             ),
-            onPressed: () {},
+            onPressed: () => controller.logout(),
           ),
         ],
       ),

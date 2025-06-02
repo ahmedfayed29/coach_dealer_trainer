@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coach/art_core/art_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,7 +17,6 @@ class PickedGalleryImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final logic = Get.find<CompleteRegisterLogic>();
-
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -26,7 +27,11 @@ class PickedGalleryImage extends StatelessWidget {
             border: Border.all(color: AppColors.secondaryBorderColor),
             image: isEmpty
                 ? null
-                : DecorationImage(image: FileImage(logic.state.gallery[index]), fit: BoxFit.cover)),
+                : DecorationImage(
+                    image: !logic.state.gallery[index].startsWith("http")
+                        ? FileImage(File(logic.state.gallery[index]))
+                        : NetworkImage(logic.state.gallery[index]),
+                    fit: BoxFit.cover)),
         child: isEmpty
             ? Column(
                 spacing: 6.h,
