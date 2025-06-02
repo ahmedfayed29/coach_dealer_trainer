@@ -127,4 +127,13 @@ const Map<String, String> ar_EG = {
   "rules_and_conditions": "الشروط والأحكام",
   "last_week": " الأسبوع الماضي",
   "no_bookings": "لا توجد حجوزات",
+  "booking_details": "تفاصيل الحجز",
+  "class_details": "تفاصيل الحصة",
+  "class_type": "نوع الحصة",
+  "class_time": "وقت الحصة",
+  "payment_method": "طريقة الدفع",
+  "price_summary": "ملخص السعر",
+  "class_booking_fees": "رسوم الحجز",
+  "discount": "الخصم",
+  "total": "الإجمالي",
 };

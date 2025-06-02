@@ -7,6 +7,7 @@ abstract class Routes {
   static const REGISTER = '/register';
   static const OTP = '/otp';
   static const COMPLETE_REGISTER = '/complete_register';
+  static const BOOKING_DETAILS = '/booking_details';
   static const HOME = '/home';
   static const HISTORY = '/history';
   static const EVENT_DETAILS = '/event_details';

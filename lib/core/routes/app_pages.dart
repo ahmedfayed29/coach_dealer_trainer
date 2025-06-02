@@ -29,6 +29,8 @@ import '../../features/auth/login/login_page.dart';
 import '../../features/auth/profile/profile_binding.dart';
 import '../../features/auth/register/register_binding.dart';
 import '../../features/auth/register/register_page.dart';
+import '../../features/booking_details/booking_details_binding.dart';
+import '../../features/booking_details/booking_details_view.dart';
 import '../../features/history/history_binding.dart';
 import '../../features/history/history_page.dart';
 import '../../features/splash/splash_binding.dart';
@@ -82,6 +84,12 @@ class AppPages {
         isEdit: Get.arguments[2] ?? false,
       ),
       binding: CompleteRegisterBinding(),
+      transition: Transition.native,
+    ),
+    GetPage(
+      name: Routes.BOOKING_DETAILS,
+      page: () => BookingDetailsPage(item: Get.arguments[0]),
+      binding: BookingDetailsBinding(),
       transition: Transition.native,
     ),
     GetPage(

@@ -149,4 +149,8 @@ const Map<String, String> en_US = {
   "rules_and_conditions": "Rules & Conditions",
   "last_week": "Last Week",
   "no_bookings": "No Bookings",
+  "booking_details": "Booking Details",
+  "class_details": "Class Details",
+  "class_type": "Class Type",
+  "class_time": "Class Time",
 };

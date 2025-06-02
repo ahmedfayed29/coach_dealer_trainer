@@ -29,4 +29,5 @@ class AppColors {
   static const Color dividerColor = Color(0xFF707070);
   static const Color secondaryDividerColor = Color(0xFF6B6A6A);
   static const Color red = Color(0xFFDA2800);
+  static const Color gray = Color(0xFF292929);
 }

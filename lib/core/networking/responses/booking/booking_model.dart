@@ -33,7 +33,7 @@ class BookingModel {
 
   factory BookingModel.fromJson(Map<String, dynamic> json) => BookingModel(
         id: json["id"],
-        code: json["code"],
+        code: json["code"] ?? "",
         classPrice: json["class_price"],
         discount: json["discount"],
         grandTotal: json["grand_total"],
@@ -129,10 +129,10 @@ class User {
         fullPhone: json["full_phone"],
         token: json["token"],
         language: json["language"],
-        weight: json["weight"],
-        tall: json["tall"],
-        age: json["age"],
-        healthProblems: json["health_problems"],
+        weight: json["weight"] ?? 0,
+        tall: json["tall"] ?? 0,
+        age: json["age"] ?? 0,
+        healthProblems: json["health_problems"] ?? "",
         country: json["country"],
       );
 
