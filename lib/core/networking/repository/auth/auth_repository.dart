@@ -46,10 +46,17 @@ class AuthRepository extends BaseRepository {
   Future<NetworkResponse<UserResponse>> completeProfile({
     required CompleteProfileModel updateProfileModel,
   }) async {
+    final body = updateProfileModel.toJson();
+    if (updateProfileModel.image.path.isNotEmpty) {
+      body['image'] = await MultipartFile.fromFile(updateProfileModel.image.path);
+    }
+    for (int i = 0; i < updateProfileModel.gallery.length; i++) {
+      body['images[$i]'] = await MultipartFile.fromFile(updateProfileModel.gallery[i].path);
+    }
     return networkHandler.post<UserResponse>(
       UserResponse(),
       _completeProfileEndPoint,
-      body: FormData.fromMap(updateProfileModel.toJson()),
+      body: FormData.fromMap(body),
     );
   }
 

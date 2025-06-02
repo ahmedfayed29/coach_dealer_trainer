@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coach/features/auth/complete_register/complete_register_state.dart';
 
 class CompleteProfileModel {
@@ -9,6 +11,8 @@ class CompleteProfileModel {
   String experienceYears;
   String bio;
   String classPeriod;
+  File image;
+  List<File> gallery;
   List<WeekDays> workingDays;
   List<ShiftModel> shifts;
   List<SportModel> sports;
@@ -24,6 +28,8 @@ class CompleteProfileModel {
     required this.workingDays,
     required this.shifts,
     required this.sports,
+    required this.image,
+    required this.gallery,
   });
 
   Map<String, dynamic> toJson() {

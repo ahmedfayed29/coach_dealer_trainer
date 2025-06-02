@@ -213,6 +213,8 @@ class CompleteRegisterLogic extends GetxController {
   }) async {
     if (state.formKey.currentState!.validate()) {
       final body = CompleteProfileModel(
+        gallery: state.gallery.map((image) => File(image)).toList(),
+        image: File(state.image.value),
         name: state.name.value,
         phone: phone,
         countryCode: countryCode,
