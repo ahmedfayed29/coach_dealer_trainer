@@ -45,7 +45,13 @@ class CompleteRegisterState {
       )
     ]);
     classPeriod = ''.obs;
-    periodShift = RxList<ShiftPeriodModel>([ShiftPeriodModel(from: ''.obs, to: ''.obs)]);
+    periodShift = RxList<ShiftPeriodModel>([
+      ShiftPeriodModel(
+          from: ''.obs,
+          to: ''.obs,
+          fromController: TextEditingController(),
+          toController: TextEditingController())
+    ]);
     gallery = RxList<String>([]);
     image = ''.obs;
     errorName = ''.obs;
@@ -83,8 +89,14 @@ class ExperienceInListModel {
 class ShiftPeriodModel {
   final RxString from;
   final RxString to;
+  final TextEditingController fromController, toController;
 
-  ShiftPeriodModel({required this.from, required this.to});
+  ShiftPeriodModel({
+    required this.from,
+    required this.to,
+    required this.fromController,
+    required this.toController,
+  });
 }
 
 class WeekDays {

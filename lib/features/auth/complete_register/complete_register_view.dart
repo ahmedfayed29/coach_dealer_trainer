@@ -13,6 +13,7 @@ import 'complete_register_state.dart';
 class CompleteRegisterPage extends StatelessWidget {
   final String phone, countryCode;
   final bool isEdit;
+
   const CompleteRegisterPage(
       {super.key, required this.phone, required this.countryCode, required this.isEdit});
 
@@ -260,6 +261,19 @@ class CompleteRegisterPage extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: AppTextField(
+                                  onTap: () {
+                                    showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.now(),
+                                    ).then((value) {
+                                      if (value != null) {
+                                        state.periodShift[index].from.value =
+                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
+                                        state.periodShift[index].fromController.text =
+                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
+                                      }
+                                    });
+                                  },
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
                                       return "empty_field".tr;
@@ -267,11 +281,25 @@ class CompleteRegisterPage extends StatelessWidget {
                                     return null;
                                   },
                                   hint: "from".tr,
-                                  initialText: state.periodShift[index].from.value,
+                                  controller: state.periodShift[index].fromController,
+                                  // initialText: state.periodShift[index].from.value,
                                   onChanged: (v) => state.periodShift[index].from.value = v,
                                 )),
                                 Expanded(
                                     child: AppTextField(
+                                  onTap: () {
+                                    showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.now(),
+                                    ).then((value) {
+                                      if (value != null) {
+                                        state.periodShift[index].to.value =
+                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
+                                        state.periodShift[index].toController.text =
+                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
+                                      }
+                                    });
+                                  },
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
                                       return "empty_field".tr;
@@ -279,7 +307,8 @@ class CompleteRegisterPage extends StatelessWidget {
                                     return null;
                                   },
                                   hint: "to".tr,
-                                  initialText: state.periodShift[index].to.value,
+                                  controller: state.periodShift[index].toController,
+                                  // initialText: state.periodShift[index].to.value,
                                   onChanged: (v) => state.periodShift[index].to.value = v,
                                 )),
                               ],

@@ -55,8 +55,14 @@ class CompleteRegisterLogic extends GetxController {
           state.experiences.last.controller.text = sport.name;
         }
         for (var shift in response.body.data!.shifts) {
-          state.periodShift.add(ShiftPeriodModel(
-              from: shift.startTime.toString().obs, to: shift.endTime.toString().obs));
+          state.periodShift.add(
+            ShiftPeriodModel(
+              from: shift.startTime.toString().obs,
+              to: shift.endTime.toString().obs,
+              fromController: TextEditingController(text: shift.startTime.toString()),
+              toController: TextEditingController(text: shift.endTime.toString()),
+            ),
+          );
         }
         for (var image in response.body.data!.images) {
           state.gallery.add(image.url);
@@ -190,6 +196,8 @@ class CompleteRegisterLogic extends GetxController {
     state.periodShift.add(ShiftPeriodModel(
       from: ''.obs,
       to: ''.obs,
+      fromController: TextEditingController(),
+      toController: TextEditingController(),
     ));
   }
 
