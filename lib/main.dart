@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
       splitScreenMode: false,
       child: GetMaterialApp(
         key: key,
+        title: "Coach Dealer ( Coach )",
         debugShowCheckedModeBanner: false,
         enableLog: true,
         // logWriterCallback: Logger.write,

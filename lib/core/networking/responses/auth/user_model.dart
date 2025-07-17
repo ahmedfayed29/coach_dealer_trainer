@@ -59,8 +59,8 @@ class UserModel extends BaseMappable {
         classPeriod: int.tryParse(json["class_period"].toString()) ?? 0,
         country: CountryModel.fromJson(json["country"]),
         sports: List<SportsModel>.from(json["sports"].map((x) {
-          print("x is ${x}");
-          return SportsModel.fromJson(x);
+          print("x is ${x.runtimeType}");
+          return x is SportsModel ? x : SportsModel.fromJson(x);
         })),
         images: List<ImagesModel>.from(json["images"].map((x) => ImagesModel.fromJson(x))),
         workingDays: List<WorkingDaysModel>.from(
