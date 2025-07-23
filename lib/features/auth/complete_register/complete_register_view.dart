@@ -4,6 +4,7 @@ import 'package:coach/features/auth/complete_register/widgets/profile_image.dart
 import 'package:coach/features/auth/complete_register/widgets/select_sport.dart';
 import 'package:coach/features/auth/complete_register/widgets/select_week_day.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/networking/network_state_enum.dart';
@@ -280,6 +281,17 @@ class CompleteRegisterPage extends StatelessWidget {
                                     }
                                     return null;
                                   },
+                                  suffixIcon: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/clock.svg",
+                                        height: 20.h,
+                                        width: 20.w,
+                                      ),
+                                    ],
+                                  ),
                                   hint: "from".tr,
                                   controller: state.periodShift[index].fromController,
                                   // initialText: state.periodShift[index].from.value,
@@ -300,6 +312,17 @@ class CompleteRegisterPage extends StatelessWidget {
                                       }
                                     });
                                   },
+                                  suffixIcon: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/clock.svg",
+                                        height: 20.h,
+                                        width: 20.w,
+                                      ),
+                                    ],
+                                  ),
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
                                       return "empty_field".tr;

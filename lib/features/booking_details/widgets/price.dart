@@ -27,13 +27,13 @@ class Price extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppText(
-                  text: 'class_booking_fees'.tr,
+                  text: "${'class_booking_fees'.tr} : ",
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.borderColor,
                 ),
                 AppText(
-                  text: ' : ${item.classPrice}',
+                  text: item.classPrice,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                   color: AppColors.borderColor,
@@ -44,13 +44,13 @@ class Price extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppText(
-                  text: 'discount'.tr,
+                  text: "${'discount'.tr} : ",
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.borderColor,
                 ),
                 AppText(
-                  text: ' : ${item.discount}',
+                  text: item.discount,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                   color: AppColors.borderColor,
@@ -68,13 +68,13 @@ class Price extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppText(
-                  text: 'total'.tr,
+                  text: "${'total'.tr} : ",
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                   color: AppColors.borderColor,
                 ),
                 AppText(
-                  text: ' : ${item.grandTotal}',
+                  text: item.grandTotal,
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primaryColor,

@@ -33,7 +33,7 @@ class AppTextField extends StatefulWidget {
 
   final String? initialText;
 
-  final double contentPaddingVertical;
+  final double contentPaddingVertical, contentPaddingHorizontal;
 
   final Color? fillColor;
   final Color? hintColor;
@@ -64,6 +64,7 @@ class AppTextField extends StatefulWidget {
     this.controller,
     this.maxLength,
     this.contentPaddingVertical = 15,
+    this.contentPaddingHorizontal = 8,
     this.fillColor,
     this.filled,
     this.labelColor,
@@ -143,8 +144,9 @@ class _AppTextFieldState extends State<AppTextField> {
                   ? OutlineInputBorder(
                       borderSide: BorderSide.none, borderRadius: BorderRadius.circular(16))
                   : Theme.of(context).inputDecorationTheme.errorBorder,
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: widget.contentPaddingVertical, horizontal: 8),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: widget.contentPaddingVertical,
+                  horizontal: widget.contentPaddingHorizontal),
               hintText: widget.hint,
               // hintStyle: TextStyle(
               //   color: widget.hintColor ?? AppColors.secondaryColor,
@@ -181,7 +183,7 @@ class _AppTextFieldState extends State<AppTextField> {
                               CupertinoIcons.chevron_down,
                               size: 15,
                             )
-                          : const SizedBox())),
+                          : null)),
         ),
       ],
     );

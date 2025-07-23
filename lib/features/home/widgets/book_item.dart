@@ -7,6 +7,7 @@ import '../../../core/routes/app_pages.dart';
 
 class BookItem extends StatelessWidget {
   final BookingModel item;
+
   const BookItem({super.key, required this.item});
 
   @override
@@ -79,7 +80,9 @@ class BookItem extends StatelessWidget {
                             text: '${item.sport.name} - ${item.statusText}',
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.primaryColor,
+                            color: item.status.toLowerCase() == "completed"
+                                ? AppColors.green
+                                : AppColors.primaryColor,
                           ),
                         ],
                       )
