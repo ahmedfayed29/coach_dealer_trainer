@@ -38,13 +38,13 @@ class CompleteRegisterState {
     traineeNumbers = ''.obs;
     sessionNumbers = ''.obs;
     experienceYears = ''.obs;
+    classPeriod = ''.obs;
     experiences = RxList<ExperienceInListModel>([
       ExperienceInListModel(
         sport: ''.obs,
         sessionFee: ''.obs,
       )
     ]);
-    classPeriod = ''.obs;
     periodShift = RxList<ShiftPeriodModel>([
       ShiftPeriodModel(
           from: ''.obs,

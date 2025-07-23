@@ -11,23 +11,38 @@ import '../../../core/networking/network_state_enum.dart';
 import 'complete_register_logic.dart';
 import 'complete_register_state.dart';
 
-class CompleteRegisterPage extends StatelessWidget {
+class CompleteRegisterPage extends StatefulWidget {
   final String phone, countryCode;
   final bool isEdit;
 
   const CompleteRegisterPage(
-      {super.key, required this.phone, required this.countryCode, required this.isEdit});
+      {super.key,
+      required this.phone,
+      // required this.name,
+      required this.countryCode,
+      required this.isEdit});
+
+  @override
+  State<CompleteRegisterPage> createState() => _CompleteRegisterPageState();
+}
+
+class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
+  @override
+  void initState() {
+    final logic = Get.find<CompleteRegisterLogic>();
+    // if (isEdit) {
+    logic.getProfile();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final CompleteRegisterState state = Get.find<CompleteRegisterLogic>().state;
     final logic = Get.find<CompleteRegisterLogic>();
-    if (isEdit) {
-      logic.getProfile();
-    }
+
     return Scaffold(
       appBar: AppBar(
-        title: AppText(text: isEdit ? "edit_profile".tr : "complete_profile".tr),
+        title: AppText(text: widget.isEdit ? "edit_profile".tr : "complete_profile".tr),
         centerTitle: true,
       ),
       body: Obx(() {
@@ -388,8 +403,8 @@ class CompleteRegisterPage extends StatelessWidget {
                 ),
                 AppButton(
                   title: 'save'.tr,
-                  onTap: () =>
-                      logic.completeProfile(isEdit: isEdit, phone: phone, countryCode: countryCode),
+                  onTap: () => logic.completeProfile(
+                      isEdit: widget.isEdit, phone: widget.phone, countryCode: widget.countryCode),
                 ),
                 SizedBox(
                   height: 32.h,
