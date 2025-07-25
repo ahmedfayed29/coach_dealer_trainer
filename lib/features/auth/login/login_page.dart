@@ -38,8 +38,10 @@ class LoginPage extends StatelessWidget {
               text: "enter_phone_number_to_login".tr,
               fontSize: 16.h,
               color: AppColors.textSecondary,
+              height: 1.5,
               fontWeight: FontWeight.w300,
             ),
+            SizedBox(height: 31.h),
             Obx(() {
               return AppTextField(
                 label: "phone_number".tr,
@@ -83,7 +85,7 @@ class LoginPage extends StatelessWidget {
                 loading: controller.state.networkState.value == NetworkState.LOADING,
               );
             }),
-            SizedBox(height: 24.h),
+            SizedBox(height: 32.h),
             GestureDetector(
               onTap: () => Get.toNamed(Routes.REGISTER),
               child: Row(

@@ -41,7 +41,9 @@ class RegisterPage extends StatelessWidget {
                 fontSize: 16.h,
                 color: AppColors.textSecondary,
                 fontWeight: FontWeight.w300,
+                height: 1.5,
               ),
+              SizedBox(height: 31.h),
               AppTextField(
                 label: "name".tr,
                 hint: "name_hint".tr,
@@ -87,7 +89,7 @@ class RegisterPage extends StatelessWidget {
                 onTap: () => controller.register(),
                 loading: controller.state.networkState.value == NetworkState.LOADING,
               ),
-              SizedBox(height: 18.h),
+              SizedBox(height: 31.h),
               GestureDetector(
                 onTap: () => Get.back(),
                 child: Row(

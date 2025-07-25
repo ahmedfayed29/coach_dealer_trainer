@@ -11,8 +11,7 @@ class OTPPage extends StatelessWidget {
   final String countryCode;
   final bool isRegister;
 
-  const OTPPage(
-      {super.key, required this.phoneNumber, required this.countryCode, required this.isRegister});
+  const OTPPage({super.key, required this.phoneNumber, required this.countryCode, required this.isRegister});
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +43,13 @@ class OTPPage extends StatelessWidget {
               fontSize: 16.h,
               color: AppColors.textSecondary,
               fontWeight: FontWeight.w300,
+              height: 1.5,
             ),
             AppText(
               text: "+$countryCode$phoneNumber",
               fontSize: 16.h,
               color: AppColors.primaryColor,
+              height: 1.5,
             ),
             SizedBox(height: 8.h),
             PinCodeTextField(
@@ -80,8 +81,7 @@ class OTPPage extends StatelessWidget {
               backgroundColor: Colors.transparent,
               enableActiveFill: true,
               onCompleted: (v) {
-                controller.sendOTP(
-                    phone: phoneNumber, countryCode: countryCode, isRegister: isRegister);
+                controller.sendOTP(phone: phoneNumber, countryCode: countryCode, isRegister: isRegister);
               },
               onChanged: controller.updateOTP,
               appContext: context,
@@ -91,12 +91,11 @@ class OTPPage extends StatelessWidget {
             Obx(() {
               return AppButton(
                 title: "confirm".tr,
-                onTap: () => controller.sendOTP(
-                    phone: phoneNumber, countryCode: countryCode, isRegister: isRegister),
+                onTap: () => controller.sendOTP(phone: phoneNumber, countryCode: countryCode, isRegister: isRegister),
                 loading: controller.state.networkState.value == NetworkState.LOADING,
               );
             }),
-            SizedBox(height: 18.h),
+            SizedBox(height: 31.h),
             GestureDetector(
               onTap: () => Get.back(),
               child: Row(
