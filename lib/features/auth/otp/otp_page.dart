@@ -140,9 +140,9 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
                     child: Center(
                       child: AppText(
                         text:
-                            "${minutes < 9 ? "0$minutes" : minutes}:${seconds < 9 ? "0$seconds" : seconds} ",
+                            "${minutes < 10 ? "0$minutes" : minutes}:${seconds < 10 ? "0$seconds" : seconds} ",
                         textAlign: TextAlign.center,
-                        color: AppColors.textSecondary,
+                        color: AppColors.textPrimary,
                         fontSize: 40,
                         fontWeight: FontWeight.w600,
                       ),
