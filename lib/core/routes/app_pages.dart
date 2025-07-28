@@ -72,6 +72,7 @@ class AppPages {
         phoneNumber: Get.arguments[0],
         countryCode: Get.arguments[1],
         isRegister: Get.arguments[2] ?? false,
+        name: Get.arguments[3] ?? '',
       ),
       binding: OTPBinding(),
       transition: Transition.native,

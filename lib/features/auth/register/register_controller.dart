@@ -66,8 +66,7 @@ class RegisterController extends GetxController {
         );
         if (response.isRequestSuccess) {
           state.networkState.value = NetworkState.SUCCESS;
-          Get.toNamed(Routes.OTP,
-              arguments: [state.phone.value, state.country.value.countryCode, true]);
+          Get.toNamed(Routes.OTP, arguments: [state.phone.value, state.country.value.countryCode, true, state.name.value]);
         } else {
           state.networkState.value = NetworkState.ERROR;
           showCustomSnackBar(response.errorMessage, isError: true);
