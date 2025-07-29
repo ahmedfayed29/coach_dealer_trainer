@@ -13,7 +13,7 @@ class OTPPageState {
     otp = ''.obs;
     errorOTP = ''.obs;
     networkState = NetworkState.INITIAL.obs;
-    countDownTime = 120.obs;
+    countDownTime = 30.obs;
     canResend = false.obs;
   }
 }

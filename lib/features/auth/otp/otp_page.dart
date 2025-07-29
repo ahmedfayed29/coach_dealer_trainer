@@ -118,35 +118,43 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
                 builder: (BuildContext context, Widget? child) {
                   final minutes = controller.durationAnimation.value.inMinutes;
                   final seconds = controller.durationAnimation.value.inSeconds % 60;
-                  return Visibility(
-                    visible: controller.durationAnimation.value.inSeconds > 0,
-                    replacement: GestureDetector(
-                      onTap: () => controller.resendOtp(
-                          phone: widget.phoneNumber, countryCode: widget.countryCode),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AppText(
-                            text: "${"didnt_receive_code".tr} ",
-                            fontWeight: FontWeight.w300,
-                          ),
-                          AppText(
-                            text: "resend_code".tr,
-                            color: AppColors.primaryColor,
-                          ),
-                        ],
+                  return Column(
+                    children: [
+                      Center(
+                        child: AppText(
+                          text:
+                              "${minutes < 10 ? "0$minutes" : minutes}:${seconds < 10 ? "0$seconds" : seconds} ",
+                          textAlign: TextAlign.center,
+                          color: AppColors.textPrimary,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: AppText(
-                        text:
-                            "${minutes < 10 ? "0$minutes" : minutes}:${seconds < 10 ? "0$seconds" : seconds} ",
-                        textAlign: TextAlign.center,
-                        color: AppColors.textPrimary,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w600,
+                      GestureDetector(
+                        onTap: () {
+                          if (controller.durationAnimation.value.inSeconds > 0) {
+                            return;
+                          }
+                          controller.resendOtp(
+                              phone: widget.phoneNumber, countryCode: widget.countryCode);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AppText(
+                              text: "${"didnt_receive_code".tr} ",
+                              fontWeight: FontWeight.w300,
+                            ),
+                            AppText(
+                              text: "resend_code".tr,
+                              color: controller.durationAnimation.value.inSeconds > 0
+                                  ? AppColors.gray
+                                  : AppColors.primaryColor,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   );
                 }),
           ],
