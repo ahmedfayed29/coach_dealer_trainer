@@ -16,25 +16,13 @@ class OTPController extends GetxController {
   late Animation durationAnimation;
 
   final preferenceManager = Get.find<PreferenceManager>();
-  late AnimationController animationController;
-  late Animation durationAnimation;
 
   initializeCounter(TickerProviderStateMixin vsync) {
     animationController = AnimationController(vsync: vsync, duration: const Duration(seconds: 120));
 
-    durationAnimation = Tween(begin: Duration(seconds: state.countDownTime.value), end: Duration.zero).animate(animationController);
-    durationAnimation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        state.canResend.value = true;
-      }
-    });
-    animationController.forward();
-  }
-
-  initializeCounter(TickerProviderStateMixin vsync) {
-    animationController = AnimationController(vsync: vsync, duration: const Duration(seconds: 120));
-
-    durationAnimation = Tween(begin: Duration(seconds: state.countDownTime.value), end: Duration.zero).animate(animationController);
+    durationAnimation =
+        Tween(begin: Duration(seconds: state.countDownTime.value), end: Duration.zero)
+            .animate(animationController);
     durationAnimation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         state.canResend.value = true;
@@ -80,7 +68,8 @@ class OTPController extends GetxController {
         preferenceManager.saveAuthToken(response.body.data!.token!);
         preferenceManager.saveIsLoggedIn(true);
         preferenceManager.saveUser(response.body.data!);
-        Get.toNamed(isRegister ? Routes.COMPLETE_REGISTER : Routes.HOME, arguments: isRegister ? [phone, countryCode, false] : []);
+        Get.toNamed(isRegister ? Routes.COMPLETE_REGISTER : Routes.HOME,
+            arguments: isRegister ? [phone, countryCode, false] : []);
       } else {
         state.networkState.value = NetworkState.ERROR;
         showCustomSnackBar(response.errorMessage, isError: true);

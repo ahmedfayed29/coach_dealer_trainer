@@ -12,19 +12,12 @@ class OTPPage extends StatefulWidget {
   final bool isRegister;
   final String name;
 
-  const OTPPage({super.key, required this.phoneNumber, required this.countryCode, required this.isRegister, required this.name});
-
-  @override
-  State<OTPPage> createState() => _OTPPageState();
-}
-
-class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-    final controller = Get.find<OTPController>();
-    controller.initializeCounter(this);
-  }
+  const OTPPage(
+      {super.key,
+      required this.phoneNumber,
+      required this.countryCode,
+      required this.isRegister,
+      required this.name});
 
   @override
   State<OTPPage> createState() => _OTPPageState();
@@ -106,7 +99,10 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
               backgroundColor: Colors.transparent,
               enableActiveFill: true,
               onCompleted: (v) {
-                controller.sendOTP(phone: widget.phoneNumber, countryCode: widget.countryCode, isRegister: widget.isRegister);
+                controller.sendOTP(
+                    phone: widget.phoneNumber,
+                    countryCode: widget.countryCode,
+                    isRegister: widget.isRegister);
               },
               onChanged: controller.updateOTP,
               appContext: context,
@@ -116,7 +112,10 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
             Obx(() {
               return AppButton(
                 title: "confirm".tr,
-                onTap: () => controller.sendOTP(phone: widget.phoneNumber, countryCode: widget.countryCode, isRegister: widget.isRegister),
+                onTap: () => controller.sendOTP(
+                    phone: widget.phoneNumber,
+                    countryCode: widget.countryCode,
+                    isRegister: widget.isRegister),
                 loading: controller.state.networkState.value == NetworkState.LOADING,
               );
             }),
@@ -130,7 +129,8 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
                     children: [
                       Center(
                         child: AppText(
-                          text: "${minutes < 10 ? "0$minutes" : minutes}:${seconds < 10 ? "0$seconds" : seconds} ",
+                          text:
+                              "${minutes < 10 ? "0$minutes" : minutes}:${seconds < 10 ? "0$seconds" : seconds} ",
                           textAlign: TextAlign.center,
                           color: AppColors.textPrimary,
                           fontSize: 16.sp,
@@ -142,7 +142,8 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
                           if (controller.durationAnimation.value.inSeconds > 0) {
                             return;
                           }
-                          controller.resendOtp(phone: widget.phoneNumber, countryCode: widget.countryCode);
+                          controller.resendOtp(
+                              phone: widget.phoneNumber, countryCode: widget.countryCode);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -153,7 +154,9 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
                             ),
                             AppText(
                               text: "resend_code".tr,
-                              color: controller.durationAnimation.value.inSeconds > 0 ? AppColors.gray : AppColors.primaryColor,
+                              color: controller.durationAnimation.value.inSeconds > 0
+                                  ? AppColors.gray
+                                  : AppColors.primaryColor,
                             ),
                           ],
                         ),
