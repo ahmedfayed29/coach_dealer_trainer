@@ -5,6 +5,7 @@ import 'package:coach/features/booking_details/widgets/price.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../art_core/widgets/payment_method_item.dart';
 import '../../core/networking/responses/booking/booking_model.dart';
 import 'booking_details_logic.dart';
 import 'booking_details_state.dart';
@@ -37,6 +38,15 @@ class BookingDetailsPage extends StatelessWidget {
           Details(
             item: item,
           ),
+          AppText(text: "payment_method".tr, fontSize: 20),
+          SizedBox(height: 16.h),
+          PaymentMethodItem(
+            image: "assets/images/knet.png",
+            name: "K-Net",
+            isSelected: true,
+            isSelectable: false,
+          ),
+          SizedBox(height: 16.h),
           AppText(
               text: 'price_summary'.tr,
               fontSize: 18.sp,

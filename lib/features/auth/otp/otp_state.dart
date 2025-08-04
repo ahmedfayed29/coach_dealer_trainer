@@ -8,13 +8,12 @@ class OTPPageState {
   late Rx<NetworkState> networkState;
   late Rx<bool> canResend;
   late Rx<int> countDownTime;
-
   OTPPageState() {
     ///Initialize variables
     otp = ''.obs;
     errorOTP = ''.obs;
     networkState = NetworkState.INITIAL.obs;
-    countDownTime = 120.obs;
+    countDownTime = 30.obs;
     canResend = false.obs;
   }
 }

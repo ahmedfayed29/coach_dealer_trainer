@@ -27,6 +27,18 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
   }
 
   @override
+  State<OTPPage> createState() => _OTPPageState();
+}
+
+class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
+  @override
+  void initState() {
+    final controller = Get.find<OTPController>();
+    controller.initializeCounter(this);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final controller = Get.find<OTPController>();
     return Scaffold(
@@ -94,7 +106,9 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
               backgroundColor: Colors.transparent,
               enableActiveFill: true,
               onCompleted: (v) {
-                controller.sendOTP(phone: widget.phoneNumber, countryCode: widget.countryCode, isRegister: widget.isRegister);
+                controller.sendOTP(phone: widget.phoneNumber,
+                    countryCode: widget.countryCode,
+                    isRegister: widget.isRegister);
               },
               onChanged: controller.updateOTP,
               appContext: context,
@@ -104,44 +118,55 @@ class _OTPPageState extends State<OTPPage> with TickerProviderStateMixin {
             Obx(() {
               return AppButton(
                 title: "confirm".tr,
-                onTap: () => controller.sendOTP(phone: widget.phoneNumber, countryCode: widget.countryCode, isRegister: widget.isRegister),
+                onTap: () => controller.sendOTP(phone: widget.phoneNumber,
+                    countryCode: widget.countryCode,
+                    isRegister: widget.isRegister),
                 loading: controller.state.networkState.value == NetworkState.LOADING,
               );
             }),
-            SizedBox(height: 31.h),
+            SizedBox(height: 18.h),
             AnimatedBuilder(
                 animation: controller.animationController,
                 builder: (BuildContext context, Widget? child) {
                   final minutes = controller.durationAnimation.value.inMinutes;
                   final seconds = controller.durationAnimation.value.inSeconds % 60;
-                  return Visibility(
-                    visible: controller.durationAnimation.value.inSeconds > 0,
-                    replacement: GestureDetector(
-                      onTap: () => controller.resendOtp(
-                          phone: widget.phoneNumber, countryCode: widget.countryCode, isRegister: widget.isRegister, name: widget.name),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AppText(
-                            text: "${"didnt_receive_code".tr} ",
-                            fontWeight: FontWeight.w300,
-                          ),
-                          AppText(
-                            text: "resend_code".tr,
-                            color: AppColors.primaryColor,
-                          ),
-                        ],
+                  return Column(
+                    children: [
+                      Center(
+                        child: AppText(
+                          text:
+                              "${minutes < 10 ? "0$minutes" : minutes}:${seconds < 10 ? "0$seconds" : seconds} ",
+                          textAlign: TextAlign.center,
+                          color: AppColors.textPrimary,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: AppText(
-                        text: "${minutes < 10 ? "0$minutes" : minutes}:${seconds < 10 ? "0$seconds" : seconds} ",
-                        textAlign: TextAlign.center,
-                        color: AppColors.primaryColor,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
+                      GestureDetector(
+                        onTap: () {
+                          if (controller.durationAnimation.value.inSeconds > 0) {
+                            return;
+                          }
+                          controller.resendOtp(
+                              phone: widget.phoneNumber, countryCode: widget.countryCode);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AppText(
+                              text: "${"didnt_receive_code".tr} ",
+                              fontWeight: FontWeight.w300,
+                            ),
+                            AppText(
+                              text: "resend_code".tr,
+                              color: controller.durationAnimation.value.inSeconds > 0
+                                  ? AppColors.gray
+                                  : AppColors.primaryColor,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   );
                 }),
           ],

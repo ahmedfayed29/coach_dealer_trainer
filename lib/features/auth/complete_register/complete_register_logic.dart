@@ -34,14 +34,20 @@ class CompleteRegisterLogic extends GetxController {
       final response = await authRepository.getProfile();
       if (response.isRequestSuccess) {
         state.country.value = response.body.data!.country;
-        state.phone.value = response.body.data!.phone;
-        state.name.value = response.body.data!.name;
-        state.bio.value = "${response.body.data!.bio}";
-        state.traineeNumbers.value = response.body.data!.traineesNumber.toString();
-        state.sessionNumbers.value = response.body.data!.sessionsNumber.toString();
-        state.experienceYears.value = response.body.data!.experienceYears.toString();
+        state.phone.value = response.body.data!.phone ?? "";
+        state.name.value = response.body.data!.name ?? "";
+        state.bio.value = "${response.body.data!.bio ?? ""}";
+        state.traineeNumbers.value = (response.body.data!.traineesNumber ?? "").toString();
+        state.sessionNumbers.value = (response.body.data!.sessionsNumber ?? "").toString() ?? "";
+        state.experienceYears.value = (response.body.data!.experienceYears ?? "").toString() ?? "";
         state.experiences.clear();
         state.periodShift.clear();
+        if (response.body.data!.sports.isEmpty) {
+          state.experiences.add(ExperienceInListModel(
+            sport: ''.obs,
+            sessionFee: ''.obs,
+          ));
+        }
         for (var sport in response.body.data!.sports) {
           state.experiences.add(ExperienceInListModel(
             sport: sport.id.toString().obs,
@@ -53,6 +59,14 @@ class CompleteRegisterLogic extends GetxController {
           ));
           print("name is ${sport.name}");
           state.experiences.last.controller.text = sport.name;
+        }
+        if (response.body.data!.shifts.isEmpty) {
+          state.periodShift.add(ShiftPeriodModel(
+            from: ''.obs,
+            to: ''.obs,
+            fromController: TextEditingController(),
+            toController: TextEditingController(),
+          ));
         }
         for (var shift in response.body.data!.shifts) {
           state.periodShift.add(

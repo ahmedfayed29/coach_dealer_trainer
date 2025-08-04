@@ -4,6 +4,7 @@ import 'package:coach/features/auth/complete_register/widgets/profile_image.dart
 import 'package:coach/features/auth/complete_register/widgets/select_sport.dart';
 import 'package:coach/features/auth/complete_register/widgets/select_week_day.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -11,22 +12,37 @@ import '../../../core/networking/network_state_enum.dart';
 import 'complete_register_logic.dart';
 import 'complete_register_state.dart';
 
-class CompleteRegisterPage extends StatelessWidget {
+class CompleteRegisterPage extends StatefulWidget {
   final String phone, countryCode;
   final bool isEdit;
 
-  const CompleteRegisterPage({super.key, required this.phone, required this.countryCode, required this.isEdit});
+  const CompleteRegisterPage({super.key,
+      required this.phone,
+      // required this.name,
+      required this.countryCode,
+      required this.isEdit});
+
+  @override
+  State<CompleteRegisterPage> createState() => _CompleteRegisterPageState();
+}
+
+class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
+  @override
+  void initState() {
+    final logic = Get.find<CompleteRegisterLogic>();
+    // if (isEdit) {
+    logic.getProfile();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final CompleteRegisterState state = Get.find<CompleteRegisterLogic>().state;
     final logic = Get.find<CompleteRegisterLogic>();
-    if (isEdit) {
-      logic.getProfile();
-    }
+
     return Scaffold(
       appBar: AppBar(
-        title: AppText(text: isEdit ? "edit_profile".tr : "complete_profile".tr),
+        title: AppText(text: widget.isEdit ? "edit_profile".tr : "complete_profile".tr),
         centerTitle: true,
       ),
       body: Obx(() {
@@ -278,6 +294,17 @@ class CompleteRegisterPage extends StatelessWidget {
                                     }
                                     return null;
                                   },
+                                  suffixIcon: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/clock.svg",
+                                        height: 20.h,
+                                        width: 20.w,
+                                      ),
+                                    ],
+                                  ),
                                   hint: "from".tr,
                                   controller: state.periodShift[index].fromController,
                                   // initialText: state.periodShift[index].from.value,
@@ -299,6 +326,17 @@ class CompleteRegisterPage extends StatelessWidget {
                                       }
                                     });
                                   },
+                                  suffixIcon: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/clock.svg",
+                                        height: 20.h,
+                                        width: 20.w,
+                                      ),
+                                    ],
+                                  ),
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
                                       return "empty_field".tr;
@@ -364,7 +402,8 @@ class CompleteRegisterPage extends StatelessWidget {
                 ),
                 AppButton(
                   title: 'save'.tr,
-                  onTap: () => logic.completeProfile(isEdit: isEdit, phone: phone, countryCode: countryCode),
+                  onTap: () => logic.completeProfile(
+                      isEdit: widget.isEdit, phone: widget.phone, countryCode: widget.countryCode),
                 ),
                 SizedBox(
                   height: 32.h,
