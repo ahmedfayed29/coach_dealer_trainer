@@ -5,6 +5,7 @@ import 'package:coach/features/auth/complete_register/widgets/select_sport.dart'
 import 'package:coach/features/auth/complete_register/widgets/select_week_day.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/networking/network_state_enum.dart';
 import 'complete_register_logic.dart';
@@ -14,8 +15,7 @@ class CompleteRegisterPage extends StatelessWidget {
   final String phone, countryCode;
   final bool isEdit;
 
-  const CompleteRegisterPage(
-      {super.key, required this.phone, required this.countryCode, required this.isEdit});
+  const CompleteRegisterPage({super.key, required this.phone, required this.countryCode, required this.isEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -170,8 +170,7 @@ class CompleteRegisterPage extends StatelessWidget {
                                   controller: state.experiences[index].controller,
                                   onTap: () {
                                     showSelectSportBottomSheet(state.sports.value, (position) {
-                                      logic.updateExperienceSport(
-                                          position: index, selectedIndex: position);
+                                      logic.updateExperienceSport(position: index, selectedIndex: position);
                                       Get.back();
                                     });
                                   },
@@ -188,8 +187,7 @@ class CompleteRegisterPage extends StatelessWidget {
                                   },
                                   hint: "enter_session_fees".tr,
                                   initialText: state.experiences[index].sessionFee.value,
-                                  onChanged: (value) =>
-                                      logic.updateExperienceSportFee(position: index, value: value),
+                                  onChanged: (value) => logic.updateExperienceSportFee(position: index, value: value),
                                 )),
                               ],
                             ),
@@ -267,10 +265,10 @@ class CompleteRegisterPage extends StatelessWidget {
                                       initialTime: TimeOfDay.now(),
                                     ).then((value) {
                                       if (value != null) {
-                                        state.periodShift[index].from.value =
-                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
-                                        state.periodShift[index].fromController.text =
-                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
+                                        final now = DateTime.now();
+                                        final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
+                                        state.periodShift[index].from.value = DateFormat('HH:mm').format(dateTime);
+                                        state.periodShift[index].fromController.text = DateFormat('HH:mm').format(dateTime);
                                       }
                                     });
                                   },
@@ -293,10 +291,11 @@ class CompleteRegisterPage extends StatelessWidget {
                                       initialTime: TimeOfDay.now(),
                                     ).then((value) {
                                       if (value != null) {
-                                        state.periodShift[index].to.value =
-                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
-                                        state.periodShift[index].toController.text =
-                                            "${value.hour}:${value.minute <= 9 ? "0${value.minute}" : value.minute}";
+                                        final now = DateTime.now();
+                                        final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
+
+                                        state.periodShift[index].to.value = DateFormat('HH:mm').format(dateTime);
+                                        state.periodShift[index].toController.text = DateFormat('HH:mm').format(dateTime);
                                       }
                                     });
                                   },
@@ -365,8 +364,7 @@ class CompleteRegisterPage extends StatelessWidget {
                 ),
                 AppButton(
                   title: 'save'.tr,
-                  onTap: () =>
-                      logic.completeProfile(isEdit: isEdit, phone: phone, countryCode: countryCode),
+                  onTap: () => logic.completeProfile(isEdit: isEdit, phone: phone, countryCode: countryCode),
                 ),
                 SizedBox(
                   height: 32.h,
