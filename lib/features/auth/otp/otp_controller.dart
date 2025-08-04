@@ -22,9 +22,7 @@ class OTPController extends GetxController {
   initializeCounter(TickerProviderStateMixin vsync) {
     animationController = AnimationController(vsync: vsync, duration: const Duration(seconds: 120));
 
-    durationAnimation =
-        Tween(begin: Duration(seconds: state.countDownTime.value), end: Duration.zero)
-            .animate(animationController);
+    durationAnimation = Tween(begin: Duration(seconds: state.countDownTime.value), end: Duration.zero).animate(animationController);
     durationAnimation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         state.canResend.value = true;

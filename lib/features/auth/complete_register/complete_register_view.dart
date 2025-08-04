@@ -16,7 +16,8 @@ class CompleteRegisterPage extends StatefulWidget {
   final String phone, countryCode;
   final bool isEdit;
 
-  const CompleteRegisterPage({super.key,
+  const CompleteRegisterPage(
+      {super.key,
       required this.phone,
       // required this.name,
       required this.countryCode,
@@ -402,8 +403,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 ),
                 AppButton(
                   title: 'save'.tr,
-                  onTap: () => logic.completeProfile(
-                      isEdit: widget.isEdit, phone: widget.phone, countryCode: widget.countryCode),
+                  onTap: () => logic.completeProfile(isEdit: widget.isEdit, phone: widget.phone, countryCode: widget.countryCode),
                 ),
                 SizedBox(
                   height: 32.h,
