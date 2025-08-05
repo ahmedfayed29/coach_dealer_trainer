@@ -58,13 +58,13 @@ class Details extends StatelessWidget {
             Row(
               children: [
                 AppText(
-                  text: 'class_time'.tr,
+                  text: "${'class_time'.tr} : ",
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   color: AppColors.gray,
                 ),
                 AppText(
-                  text: ' : ${item.startTime}',
+                  text: '${item.startTime}- ${item.endTime}',
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.gray,

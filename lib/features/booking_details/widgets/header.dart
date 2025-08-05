@@ -58,20 +58,17 @@ class Header extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       spacing: 8.w,
                       children: [
-                        Visibility(
-                          visible: item.code != '',
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-                            decoration: BoxDecoration(
-                                color: AppColors.primaryColor.shade500,
-                                borderRadius: BorderRadius.circular(8)),
-                            alignment: Alignment.center,
-                            child: AppText(
-                              text: '#${item.code}',
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.primaryColor,
-                            ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+                          decoration: BoxDecoration(
+                              color: AppColors.primaryColor.shade500,
+                              borderRadius: BorderRadius.circular(8)),
+                          alignment: Alignment.center,
+                          child: AppText(
+                            text: '#${item.id}',
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                         AppText(

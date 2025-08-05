@@ -70,7 +70,7 @@ class BookItem extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8)),
                             alignment: Alignment.center,
                             child: AppText(
-                              text: '#${item.code}',
+                              text: '#${item.id}',
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w700,
                               color: AppColors.primaryColor,
