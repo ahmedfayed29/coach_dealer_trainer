@@ -47,9 +47,6 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
         centerTitle: true,
       ),
       body: Obx(() {
-        if (state.networkState.value == NetworkState.LOADING) {
-          return AppLoading();
-        }
         // else if (state.networkState.value == NetworkState.ERROR) {
         //   return Center(
         //     child: AppText(
@@ -58,360 +55,361 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
         //     ),
         //   );
         // }
-        return Obx(() {
-          return Form(
-            key: state.formKey,
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 32.h),
-              children: [
-                Center(
-                  child: CompleteProfileImage(),
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppTextField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "empty_field".tr;
-                    }
-                    return null;
-                  },
-                  label: "name".tr,
-                  hint: 'enter_your_name'.tr,
-                  initialText: state.name.value,
-                  onChanged: logic.updateName,
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppTextField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "empty_field".tr;
-                    }
-                    return null;
-                  },
-                  label: "bio".tr,
-                  hint: "add_your_bio".tr,
-                  initialText: state.bio.value,
-                  maxLines: 3,
-                  textInputType: TextInputType.multiline,
-                  onChanged: logic.updateBio,
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppTextField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "empty_field".tr;
-                    }
-                    return null;
-                  },
-                  label: "trainees_numbers".tr,
-                  hint: "enter_number".tr,
-                  initialText: state.traineeNumbers.value,
-                  onChanged: logic.updateTraineeNumbers,
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppTextField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "empty_field".tr;
-                    }
-                    return null;
-                  },
-                  label: "sessions_numbers".tr,
-                  hint: "enter_number".tr,
-                  initialText: state.sessionNumbers.value,
-                  onChanged: logic.updateSessionNumbers,
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppTextField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "empty_field".tr;
-                    }
-                    return null;
-                  },
-                  label: "experience_years".tr,
-                  hint: "enter_number".tr,
-                  initialText: state.experienceYears.value,
-                  onChanged: logic.updateExperienceYears,
-                ),
-                ListView.builder(
-                    itemCount: state.experiences.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemBuilder: (_, index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 12.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AppText(
-                                  text: "experience_in".tr,
-                                  fontSize: 16.sp,
+        return Form(
+          key: state.formKey,
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 32.h),
+            children: [
+              Center(
+                child: CompleteProfileImage(),
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppTextField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "empty_field".tr;
+                  }
+                  return null;
+                },
+                label: "name".tr,
+                hint: 'enter_your_name'.tr,
+                initialText: state.name.value,
+                onChanged: logic.updateName,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppTextField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "empty_field".tr;
+                  }
+                  return null;
+                },
+                label: "bio".tr,
+                hint: "add_your_bio".tr,
+                initialText: state.bio.value,
+                maxLines: 3,
+                textInputType: TextInputType.multiline,
+                onChanged: logic.updateBio,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppTextField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "empty_field".tr;
+                  }
+                  return null;
+                },
+                label: "trainees_numbers".tr,
+                hint: "enter_number".tr,
+                initialText: state.traineeNumbers.value,
+                onChanged: logic.updateTraineeNumbers,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppTextField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "empty_field".tr;
+                  }
+                  return null;
+                },
+                label: "sessions_numbers".tr,
+                hint: "enter_number".tr,
+                initialText: state.sessionNumbers.value,
+                onChanged: logic.updateSessionNumbers,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppTextField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "empty_field".tr;
+                  }
+                  return null;
+                },
+                label: "experience_years".tr,
+                hint: "enter_number".tr,
+                initialText: state.experienceYears.value,
+                onChanged: logic.updateExperienceYears,
+              ),
+              ListView.builder(
+                  itemCount: state.experiences.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 12.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AppText(
+                                text: "experience_in".tr,
+                                fontSize: 16.sp,
+                              ),
+                              if (state.experiences.length > 1)
+                                InkWell(
+                                  onTap: () => logic.removeExperience(index: index),
+                                  child: Icon(
+                                    Icons.delete_sweep_outlined,
+                                    color: AppColors.red,
+                                  ),
                                 ),
-                                if (state.experiences.length > 1)
-                                  InkWell(
-                                    onTap: () => logic.removeExperience(index: index),
-                                    child: Icon(
-                                      Icons.delete_sweep_outlined,
-                                      color: AppColors.red,
-                                    ),
-                                  ),
-                              ],
-                            ),
-                            SizedBox(height: 12.h),
-                            Row(
-                              spacing: 12.w,
-                              children: [
-                                Expanded(
-                                    child: AppTextField(
-                                  validator: (value) {
-                                    if (value == null || value.trim().isEmpty) {
-                                      return "empty_field".tr;
-                                    }
-                                    return null;
-                                  },
-                                  hint: "select_sport".tr,
-                                  readOnly: true,
-                                  controller: state.experiences[index].controller,
-                                  onTap: () {
-                                    showSelectSportBottomSheet(state.sports.value, (position) {
-                                      logic.updateExperienceSport(position: index, selectedIndex: position);
-                                      Get.back();
-                                    });
-                                  },
-                                  // initialText: state.experiences[index].sport.value,
-                                  onChanged: logic.updateExperienceYears,
-                                )),
-                                Expanded(
-                                    child: AppTextField(
-                                  validator: (value) {
-                                    if (value == null || value.trim().isEmpty) {
-                                      return "empty_field".tr;
-                                    }
-                                    return null;
-                                  },
-                                  hint: "enter_session_fees".tr,
-                                  initialText: state.experiences[index].sessionFee.value,
-                                  onChanged: (value) => logic.updateExperienceSportFee(position: index, value: value),
-                                )),
-                              ],
-                            ),
-                          ],
-                        )),
-                SizedBox(height: 12.h),
-                InkWell(
-                  onTap: logic.addExperience,
-                  child: AppText(
-                    text: "add_sport".tr,
-                    fontSize: 16.sp,
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppTextField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "empty_field".tr;
-                    }
-                    return null;
-                  },
-                  label: "working_days".tr,
-                  hint: "select_working_days".tr,
-                  isSelectable: true,
-                  controller: state.weekDaysController,
-                  readOnly: true,
-                  onTap: () {
-                    showSelectWeekDayBottomSheet(state.weekDays.value, (position) {
-                      logic.addWeekDay(index: position);
-                      // Get.back();
-                    });
-                  },
-                  // onChanged: logic.updateWorkingDays,
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppTextField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return "empty_field".tr;
-                    }
-                    return null;
-                  },
-                  label: "class_period_in_minutes".tr,
-                  hint: "enter_class_period_in_minutes".tr,
-                  initialText: state.classPeriod.value,
-                  onChanged: logic.updateClassPeriod,
-                ),
-                ListView.builder(
-                    itemCount: state.periodShift.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemBuilder: (_, index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 12.h),
-                            AppText(
-                              text: "first_shift_hours_period".tr,
-                              fontSize: 16.sp,
-                            ),
-                            SizedBox(height: 12.h),
-                            Row(
-                              spacing: 12.w,
-                              children: [
-                                Expanded(
-                                    child: AppTextField(
-                                  onTap: () {
-                                    showTimePicker(
-                                      context: context,
-                                      initialTime: TimeOfDay.now(),
-                                    ).then((value) {
-                                      if (value != null) {
-                                        final now = DateTime.now();
-                                        final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
-                                        state.periodShift[index].from.value = DateFormat('HH:mm').format(dateTime);
-                                        state.periodShift[index].fromController.text = DateFormat('HH:mm').format(dateTime);
-                                      }
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (value == null || value.trim().isEmpty) {
-                                      return "empty_field".tr;
-                                    }
-                                    return null;
-                                  },
-                                  suffixIcon: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        "assets/icons/clock.svg",
-                                        height: 20.h,
-                                        width: 20.w,
-                                      ),
-                                    ],
-                                  ),
-                                  hint: "from".tr,
-                                  controller: state.periodShift[index].fromController,
-                                  // initialText: state.periodShift[index].from.value,
-                                  onChanged: (v) => state.periodShift[index].from.value = v,
-                                )),
-                                Expanded(
-                                    child: AppTextField(
-                                  onTap: () {
-                                    showTimePicker(
-                                      context: context,
-                                      initialTime: TimeOfDay.now(),
-                                    ).then((value) {
-                                      if (value != null) {
-                                        final now = DateTime.now();
-                                        final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
-
-                                        state.periodShift[index].to.value = DateFormat('HH:mm').format(dateTime);
-                                        state.periodShift[index].toController.text = DateFormat('HH:mm').format(dateTime);
-                                      }
-                                    });
-                                  },
-                                  suffixIcon: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        "assets/icons/clock.svg",
-                                        height: 20.h,
-                                        width: 20.w,
-                                      ),
-                                    ],
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.trim().isEmpty) {
-                                      return "empty_field".tr;
-                                    }
-                                    return null;
-                                  },
-                                  hint: "to".tr,
-                                  controller: state.periodShift[index].toController,
-                                  // initialText: state.periodShift[index].to.value,
-                                  onChanged: (v) => state.periodShift[index].to.value = v,
-                                )),
-                              ],
-                            ),
-                            SizedBox(height: 12.h),
-                          ],
-                        )),
-                InkWell(
-                  onTap: logic.addNewPeriodShift,
-                  child: AppText(
-                    text: "add_shift".tr,
-                    fontSize: 16.sp,
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                AppText(
-                  text: "gallery_images".tr,
+                            ],
+                          ),
+                          SizedBox(height: 12.h),
+                          Row(
+                            spacing: 12.w,
+                            children: [
+                              Expanded(
+                                  child: AppTextField(
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "empty_field".tr;
+                                  }
+                                  return null;
+                                },
+                                hint: "select_sport".tr,
+                                readOnly: true,
+                                controller: state.experiences[index].controller,
+                                onTap: () {
+                                  showSelectSportBottomSheet(state.sports.value, (position) {
+                                    logic.updateExperienceSport(position: index, selectedIndex: position);
+                                    Get.back();
+                                  });
+                                },
+                                // initialText: state.experiences[index].sport.value,
+                                onChanged: logic.updateExperienceYears,
+                              )),
+                              Expanded(
+                                  child: AppTextField(
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "empty_field".tr;
+                                  }
+                                  return null;
+                                },
+                                hint: "enter_session_fees".tr,
+                                initialText: state.experiences[index].sessionFee.value,
+                                onChanged: (value) => logic.updateExperienceSportFee(position: index, value: value),
+                              )),
+                            ],
+                          ),
+                        ],
+                      )),
+              SizedBox(height: 12.h),
+              InkWell(
+                onTap: logic.addExperience,
+                child: AppText(
+                  text: "add_sport".tr,
                   fontSize: 16.sp,
-                  color: AppColors.textPrimary,
+                  color: AppColors.primaryColor,
                 ),
-                SizedBox(
-                  height: 12.h,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppTextField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "empty_field".tr;
+                  }
+                  return null;
+                },
+                label: "working_days".tr,
+                hint: "select_working_days".tr,
+                isSelectable: true,
+                controller: state.weekDaysController,
+                readOnly: true,
+                onTap: () {
+                  showSelectWeekDayBottomSheet(state.weekDays.value, (position) {
+                    logic.addWeekDay(index: position);
+                    // Get.back();
+                  });
+                },
+                // onChanged: logic.updateWorkingDays,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppTextField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "empty_field".tr;
+                  }
+                  return null;
+                },
+                label: "class_period_in_minutes".tr,
+                hint: "enter_class_period_in_minutes".tr,
+                initialText: state.classPeriod.value,
+                onChanged: logic.updateClassPeriod,
+              ),
+              ListView.builder(
+                  itemCount: state.periodShift.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 12.h),
+                          AppText(
+                            text: "first_shift_hours_period".tr,
+                            fontSize: 16.sp,
+                          ),
+                          SizedBox(height: 12.h),
+                          Row(
+                            spacing: 12.w,
+                            children: [
+                              Expanded(
+                                  child: AppTextField(
+                                onTap: () {
+                                  showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.now(),
+                                  ).then((value) {
+                                    if (value != null) {
+                                      final now = DateTime.now();
+                                      final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
+                                      state.periodShift[index].from.value = DateFormat('HH:mm').format(dateTime);
+                                      state.periodShift[index].fromController.text = DateFormat('HH:mm').format(dateTime);
+                                    }
+                                  });
+                                },
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "empty_field".tr;
+                                  }
+                                  return null;
+                                },
+                                suffixIcon: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/icons/clock.svg",
+                                      height: 20.h,
+                                      width: 20.w,
+                                    ),
+                                  ],
+                                ),
+                                hint: "from".tr,
+                                controller: state.periodShift[index].fromController,
+                                // initialText: state.periodShift[index].from.value,
+                                onChanged: (v) => state.periodShift[index].from.value = v,
+                              )),
+                              Expanded(
+                                  child: AppTextField(
+                                onTap: () {
+                                  showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.now(),
+                                  ).then((value) {
+                                    if (value != null) {
+                                      final now = DateTime.now();
+                                      final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
+
+                                      state.periodShift[index].to.value = DateFormat('HH:mm').format(dateTime);
+                                      state.periodShift[index].toController.text = DateFormat('HH:mm').format(dateTime);
+                                    }
+                                  });
+                                },
+                                suffixIcon: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/icons/clock.svg",
+                                      height: 20.h,
+                                      width: 20.w,
+                                    ),
+                                  ],
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "empty_field".tr;
+                                  }
+                                  return null;
+                                },
+                                hint: "to".tr,
+                                controller: state.periodShift[index].toController,
+                                // initialText: state.periodShift[index].to.value,
+                                onChanged: (v) => state.periodShift[index].to.value = v,
+                              )),
+                            ],
+                          ),
+                          SizedBox(height: 12.h),
+                        ],
+                      )),
+              InkWell(
+                onTap: logic.addNewPeriodShift,
+                child: AppText(
+                  text: "add_shift".tr,
+                  fontSize: 16.sp,
+                  color: AppColors.primaryColor,
                 ),
-                Row(
-                  spacing: 12.w,
-                  children: [
-                    PickedGalleryImage(
-                      onTap: () => logic.addGalleryImage(),
-                      index: -1,
-                      isEmpty: true,
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                          height: 92.h,
-                          child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              itemBuilder: (_, index) => PickedGalleryImage(
-                                    onTap: () => logic.removeGalleryImage(index),
-                                    index: index,
-                                    isEmpty: false,
-                                  ),
-                              separatorBuilder: (_, index) => SizedBox(width: 12.w),
-                              itemCount: state.gallery.length)),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                AppButton(
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              AppText(
+                text: "gallery_images".tr,
+                fontSize: 16.sp,
+                color: AppColors.textPrimary,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              Row(
+                spacing: 12.w,
+                children: [
+                  PickedGalleryImage(
+                    onTap: () => logic.addGalleryImage(),
+                    index: -1,
+                    isEmpty: true,
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                        height: 92.h,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            itemBuilder: (_, index) => PickedGalleryImage(
+                                  onTap: () => logic.removeGalleryImage(index),
+                                  index: index,
+                                  isEmpty: false,
+                                ),
+                            separatorBuilder: (_, index) => SizedBox(width: 12.w),
+                            itemCount: state.gallery.length)),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              Obx(() {
+                return AppButton(
                   title: 'save'.tr,
-                  onTap: () => logic.completeProfile(isEdit: widget.isEdit, phone: widget.phone, countryCode: widget.countryCode),
-                ),
-                SizedBox(
-                  height: 32.h,
-                ),
-              ],
-            ),
-          );
-        });
+                  loading: state.networkState.value == NetworkState.LOADING,
+                  onTap: () => logic.completeProfile(phone: widget.phone, countryCode: widget.countryCode),
+                );
+              }),
+              SizedBox(
+                height: 32.h,
+              ),
+            ],
+          ),
+        );
       }),
     );
   }

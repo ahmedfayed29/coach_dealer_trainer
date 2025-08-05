@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:coach/core/caching/preference_manager.dart';
 import 'package:coach/core/networking/responses/sports/sports_model.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -88,8 +89,7 @@ class CompleteRegisterLogic extends GetxController {
               id: day.day,
             ),
           );
-          state.weekDaysController.text =
-              state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
+          state.weekDaysController.text = state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
         }
         state.classPeriod.value = response.body.data!.classPeriod.toString();
         state.image.value = response.body.data!.image;
@@ -129,17 +129,13 @@ class CompleteRegisterLogic extends GetxController {
   }
 
   void addWeekDay({required int index}) {
-    if (state.selectedWeekDays.value
-        .any((day) => day.dayName == state.weekDays.value[index].dayName)) {
-      state.selectedWeekDays.value
-          .removeWhere((day) => day.dayName == state.weekDays.value[index].dayName);
-      state.weekDaysController.text =
-          state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
+    if (state.selectedWeekDays.value.any((day) => day.dayName == state.weekDays.value[index].dayName)) {
+      state.selectedWeekDays.value.removeWhere((day) => day.dayName == state.weekDays.value[index].dayName);
+      state.weekDaysController.text = state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
       return;
     }
     state.selectedWeekDays.value.add(state.weekDays.value[index]);
-    state.weekDaysController.text =
-        state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
+    state.weekDaysController.text = state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
   }
 
   void updatePhone(String phone) {
@@ -231,14 +227,14 @@ class CompleteRegisterLogic extends GetxController {
   Future<void> completeProfile({
     required String countryCode,
     required String phone,
-    required bool isEdit,
   }) async {
     if (state.formKey.currentState!.validate()) {
+      state.networkState.value = NetworkState.LOADING;
       final body = CompleteProfileModel(
         gallery: state.gallery.map((image) => File(image)).toList(),
         image: File(state.image.value),
         name: state.name.value,
-        phone: phone.replaceAll("966", ""),
+        phone: Get.find<PreferenceManager>().getUser().phone,
         countryCode: countryCode,
         traineesNumber: state.traineeNumbers.value,
         sessionsNumber: state.sessionNumbers.value,
@@ -262,8 +258,9 @@ class CompleteRegisterLogic extends GetxController {
       final res = await authRepository.completeProfile(updateProfileModel: body);
       if (res.isRequestSuccess) {
         state.networkState.value = NetworkState.SUCCESS;
+        Get.find<PreferenceManager>().saveUser(res.body.data!);
         Get.offAllNamed(Routes.HOME);
-        // Get.offAllNamed(isEdit ? Routes.HOME : Routes.LOGIN);
+        Get.forceAppUpdate();
       } else {
         state.networkState.value = NetworkState.ERROR;
         showCustomSnackBar(res.errorMessage, isError: true);

@@ -16,36 +16,40 @@ class CompleteProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final logic = Get.find<CompleteRegisterLogic>();
-    return SizedBox(
-      height: 150.h,
-      child: Stack(
-        children: [
-          InkWell(
-            onTap: () => logic.updateImage(),
-            child: Container(
-              height: 140.h,
-              width: 140.w,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.textShade.withOpacity(.1),
-                  border: Border.all(
-                    color: AppColors.primaryColor,
-                    width: 2,
-                  ),
-                  image: DecorationImage(
-                      image: FileImage(
-                        File(logic.state.image.value),
-                      ),
-                      fit: BoxFit.cover)),
+    return Obx(() {
+      return SizedBox(
+        height: 150.h,
+        child: Stack(
+          children: [
+            InkWell(
+              onTap: () => logic.updateImage(),
+              child: Container(
+                height: 140.h,
+                width: 140.w,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.textShade.withOpacity(.1),
+                    border: Border.all(
+                      color: AppColors.primaryColor,
+                      width: 2,
+                    ),
+                    image: DecorationImage(
+                        image: logic.state.image.value.contains("http")
+                            ? NetworkImage(logic.state.image.value)
+                            : FileImage(
+                                File(logic.state.image.value),
+                              ),
+                        fit: BoxFit.cover)),
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 5,
-            right: 10,
-            child: SvgPicture.asset("assets/icons/edit.svg"),
-          ),
-        ],
-      ),
-    );
+            Positioned(
+              bottom: 5,
+              right: 10,
+              child: SvgPicture.asset("assets/icons/edit.svg"),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

@@ -62,10 +62,15 @@ class UserModel extends BaseMappable {
           print("x is ${x.runtimeType}");
           return x is SportsModel ? x : SportsModel.fromJson(x);
         })),
-        images: List<ImagesModel>.from(json["images"].map((x) => ImagesModel.fromJson(x))),
-        workingDays: List<WorkingDaysModel>.from(
-            json["working_days"].map((x) => WorkingDaysModel.fromJson(x))),
-        shifts: List<ShiftsModel>.from(json["shifts"].map((x) => ShiftsModel.fromJson(x))),
+        images: List<ImagesModel>.from(json["images"].map((x) {
+          return x is ImagesModel ? x : ImagesModel.fromJson(x);
+        })),
+        workingDays: List<WorkingDaysModel>.from(json["working_days"].map((x) {
+          return x is WorkingDaysModel ? x : WorkingDaysModel.fromJson(x);
+        })),
+        shifts: List<ShiftsModel>.from(json["shifts"].map((x) {
+          return x is ShiftsModel ? x : ShiftsModel.fromJson(x);
+        })),
       );
 
   Map<String, dynamic> toJson() => {

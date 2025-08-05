@@ -52,22 +52,24 @@ class AuthRepository extends BaseRepository {
       if (updateProfileModel.image.path.isNotEmpty) {
         formData.files.add(MapEntry(
           'image',
-          await MultipartFile.fromFile(updateProfileModel.image.path),
+          MultipartFile.fromFileSync(updateProfileModel.image.path),
         ));
       }
     } catch (e) {
       print("errror is $e");
     }
     for (int i = 0; i < updateProfileModel.gallery.length; i++) {
+      if (updateProfileModel.gallery[i].path.contains("http")) continue;
+
       formData.files.add(MapEntry(
         'images[$i]',
-        await MultipartFile.fromFile(updateProfileModel.gallery[i].path),
+        MultipartFile.fromFileSync(updateProfileModel.gallery[i].path),
       ));
     }
     return networkHandler.post<UserResponse>(
       UserResponse(),
       _completeProfileEndPoint,
-      body: FormData.fromMap(body),
+      body: formData,
     );
   }
 

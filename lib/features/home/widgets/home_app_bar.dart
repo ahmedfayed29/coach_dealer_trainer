@@ -11,6 +11,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final user = Get.find<PreferenceManager>().getUser();
+    print("USER IMAGE IN HOME APP BAR ${user.image}");
     return AppBar(
       leadingWidth: 70.w,
       leading: GestureDetector(
