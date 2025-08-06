@@ -35,6 +35,7 @@ class LoginController extends GetxController {
   }
 
   bool validatePhone() {
+    return true;
     if (!GetUtils.isPhoneNumber(state.phone.value)) {
       state.errorPhone.value = "phone_number_validator".tr;
       return false;
@@ -48,10 +49,12 @@ class LoginController extends GetxController {
     try {
       if (validatePhone()) {
         state.networkState.value = NetworkState.LOADING;
-        final response = await authRepository.login(phone: state.phone.value, countryCode: state.country.value.countryCode!);
+        final response = await authRepository.login(
+            phone: state.phone.value, countryCode: state.country.value.countryCode!);
         if (response.isRequestSuccess) {
           state.networkState.value = NetworkState.SUCCESS;
-          Get.toNamed(Routes.OTP, arguments: [state.phone.value, state.country.value.countryCode, false, ""]);
+          Get.toNamed(Routes.OTP,
+              arguments: [state.phone.value, state.country.value.countryCode, false, ""]);
         } else {
           state.networkState.value = NetworkState.ERROR;
           showCustomSnackBar(response.errorMessage, isError: true);

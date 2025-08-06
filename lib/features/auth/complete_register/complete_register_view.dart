@@ -75,7 +75,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 },
                 label: "name".tr,
                 hint: 'enter_your_name'.tr,
-                initialText: state.name.value,
+                controller: TextEditingController(text: state.name.value),
                 onChanged: logic.updateName,
               ),
               SizedBox(
@@ -90,7 +90,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 },
                 label: "bio".tr,
                 hint: "add_your_bio".tr,
-                initialText: state.bio.value,
+                controller: TextEditingController(text: state.bio.value),
                 maxLines: 3,
                 textInputType: TextInputType.multiline,
                 onChanged: logic.updateBio,
@@ -107,7 +107,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 },
                 label: "trainees_numbers".tr,
                 hint: "enter_number".tr,
-                initialText: state.traineeNumbers.value,
+                controller: TextEditingController(text: state.traineeNumbers.value),
                 onChanged: logic.updateTraineeNumbers,
               ),
               SizedBox(
@@ -122,7 +122,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 },
                 label: "sessions_numbers".tr,
                 hint: "enter_number".tr,
-                initialText: state.sessionNumbers.value,
+                controller: TextEditingController(text: state.sessionNumbers.value),
                 onChanged: logic.updateSessionNumbers,
               ),
               SizedBox(
@@ -137,7 +137,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 },
                 label: "experience_years".tr,
                 hint: "enter_number".tr,
-                initialText: state.experienceYears.value,
+                controller: TextEditingController(text: state.experienceYears.value),
                 onChanged: logic.updateExperienceYears,
               ),
               ListView.builder(
@@ -183,7 +183,8 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                                 controller: state.experiences[index].controller,
                                 onTap: () {
                                   showSelectSportBottomSheet(state.sports.value, (position) {
-                                    logic.updateExperienceSport(position: index, selectedIndex: position);
+                                    logic.updateExperienceSport(
+                                        position: index, selectedIndex: position);
                                     Get.back();
                                   });
                                 },
@@ -200,7 +201,8 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                                 },
                                 hint: "enter_session_fees".tr,
                                 initialText: state.experiences[index].sessionFee.value,
-                                onChanged: (value) => logic.updateExperienceSportFee(position: index, value: value),
+                                onChanged: (value) =>
+                                    logic.updateExperienceSportFee(position: index, value: value),
                               )),
                             ],
                           ),
@@ -250,7 +252,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 },
                 label: "class_period_in_minutes".tr,
                 hint: "enter_class_period_in_minutes".tr,
-                initialText: state.classPeriod.value,
+                controller: TextEditingController(text: state.classPeriod.value),
                 onChanged: logic.updateClassPeriod,
               ),
               ListView.builder(
@@ -279,9 +281,12 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                                   ).then((value) {
                                     if (value != null) {
                                       final now = DateTime.now();
-                                      final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
-                                      state.periodShift[index].from.value = DateFormat('HH:mm').format(dateTime);
-                                      state.periodShift[index].fromController.text = DateFormat('HH:mm').format(dateTime);
+                                      final dateTime = DateTime(
+                                          now.year, now.month, now.day, value.hour, value.minute);
+                                      state.periodShift[index].from.value =
+                                          DateFormat('HH:mm').format(dateTime);
+                                      state.periodShift[index].fromController.text =
+                                          DateFormat('HH:mm').format(dateTime);
                                     }
                                   });
                                 },
@@ -316,10 +321,13 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                                   ).then((value) {
                                     if (value != null) {
                                       final now = DateTime.now();
-                                      final dateTime = DateTime(now.year, now.month, now.day, value.hour, value.minute);
+                                      final dateTime = DateTime(
+                                          now.year, now.month, now.day, value.hour, value.minute);
 
-                                      state.periodShift[index].to.value = DateFormat('HH:mm').format(dateTime);
-                                      state.periodShift[index].toController.text = DateFormat('HH:mm').format(dateTime);
+                                      state.periodShift[index].to.value =
+                                          DateFormat('HH:mm').format(dateTime);
+                                      state.periodShift[index].toController.text =
+                                          DateFormat('HH:mm').format(dateTime);
                                     }
                                   });
                                 },
@@ -401,7 +409,8 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 return AppButton(
                   title: 'save'.tr,
                   loading: state.networkState.value == NetworkState.LOADING,
-                  onTap: () => logic.completeProfile(phone: widget.phone, countryCode: widget.countryCode),
+                  onTap: () =>
+                      logic.completeProfile(phone: widget.phone, countryCode: widget.countryCode),
                 );
               }),
               SizedBox(

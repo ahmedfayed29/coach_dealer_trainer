@@ -27,7 +27,7 @@ class PreferenceManager {
 
   void saveLanguage(String lang) => GetStorage().write(CachingKey.LANGUAGE, lang);
 
-  String currentLang() => GetStorage().read(CachingKey.LANGUAGE) as String? ?? "en";
+  String currentLang() => GetStorage().read(CachingKey.LANGUAGE) as String? ?? "ar";
 
   void logout() {
     GetStorage().erase();

@@ -89,7 +89,8 @@ class CompleteRegisterLogic extends GetxController {
               id: day.day,
             ),
           );
-          state.weekDaysController.text = state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
+          state.weekDaysController.text =
+              state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
         }
         state.classPeriod.value = response.body.data!.classPeriod.toString();
         state.image.value = response.body.data!.image;
@@ -129,13 +130,17 @@ class CompleteRegisterLogic extends GetxController {
   }
 
   void addWeekDay({required int index}) {
-    if (state.selectedWeekDays.value.any((day) => day.dayName == state.weekDays.value[index].dayName)) {
-      state.selectedWeekDays.value.removeWhere((day) => day.dayName == state.weekDays.value[index].dayName);
-      state.weekDaysController.text = state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
+    if (state.selectedWeekDays.value
+        .any((day) => day.dayName == state.weekDays.value[index].dayName)) {
+      state.selectedWeekDays.value
+          .removeWhere((day) => day.dayName == state.weekDays.value[index].dayName);
+      state.weekDaysController.text =
+          state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
       return;
     }
     state.selectedWeekDays.value.add(state.weekDays.value[index]);
-    state.weekDaysController.text = state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
+    state.weekDaysController.text =
+        state.selectedWeekDays.value.map((day) => day.dayName).join(', ');
   }
 
   void updatePhone(String phone) {
@@ -229,7 +234,7 @@ class CompleteRegisterLogic extends GetxController {
     required String phone,
   }) async {
     if (state.formKey.currentState!.validate()) {
-      state.networkState.value = NetworkState.LOADING;
+      // state.networkState.value = NetworkState.LOADING;
       final body = CompleteProfileModel(
         gallery: state.gallery.map((image) => File(image)).toList(),
         image: File(state.image.value),
