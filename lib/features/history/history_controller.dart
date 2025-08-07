@@ -13,9 +13,18 @@ class HistoryController extends GetxController {
     getTodaySession();
   }
 
+  void setFilter(String value) {
+    Get.back();
+    state.filter.value = value;
+    state.filter.refresh();
+    getTodaySession();
+  }
+
   Future<void> getTodaySession() async {
     state.networkState.value = NetworkState.LOADING;
-    final res = await BookingRepository().todayBooking();
+    final res = await BookingRepository().historyBooking(
+      period: state.filter.value == "" ? null : state.filter.value,
+    );
     if (res.isRequestSuccess) {
       state.todaySession.value = res.body.data!;
       state.networkState.value = NetworkState.SUCCESS;

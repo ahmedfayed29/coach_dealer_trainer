@@ -17,10 +17,11 @@ class BookingRepository extends BaseRepository {
   }
 
   /// _historyBooking
-  Future<NetworkResponse<BookingResponse>> historyBooking() async {
+  Future<NetworkResponse<BookingResponse>> historyBooking({String? period}) async {
+    final String params = period != null ? '?period=$period' : '';
     return networkHandler.get<BookingResponse>(
       BookingResponse(),
-      _historyBooking,
+      _historyBooking + params,
     );
   }
 }

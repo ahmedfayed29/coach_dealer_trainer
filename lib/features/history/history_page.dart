@@ -1,4 +1,5 @@
 import 'package:coach/art_core/art_core.dart';
+import 'package:coach/features/history/widgets/filter.dart';
 import 'package:coach/features/history/widgets/history_app_bar.dart';
 import 'package:coach/features/home/widgets/book_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,11 +37,17 @@ class HistoryPage extends StatelessWidget {
           shrinkWrap: true,
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 32.h),
           children: [
-            AppText(
-              text: 'last_week'.tr,
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+            InkWell(
+              onTap: () {
+                showSelectFilter(["last_week", "last_month", "last_3_month", "last_year"],
+                    (filter) => controller.setFilter(filter));
+              },
+              child: AppText(
+                text: (state.filter.value == "" ? 'see_all' : state.filter.value).tr,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
             ListView.separated(
                 shrinkWrap: true,
