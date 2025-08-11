@@ -19,6 +19,7 @@ class AuthRepository extends BaseRepository {
   final String _getSportsEndPoint = '/sports';
   final String _profileEndPoint = '/coach/auth/profile';
   final String _logout = '/coach/auth/logout';
+  final String _updateSettings = '/coach/auth/update-setting';
 
   /// Login
   Future<NetworkResponse<GlobalResponse>> login({
@@ -161,5 +162,14 @@ class AuthRepository extends BaseRepository {
     if (gender != null) body.fields.add(MapEntry('gender', gender));
 
     return networkHandler.post<UserResponse>(UserResponse(), _profileEndPoint, body: body);
+  }
+
+  Future<NetworkResponse<UserResponse>> updateSettings(
+      {required bool isNotificationsEnabled}) async {
+    return networkHandler.post<UserResponse>(
+      UserResponse(),
+      _updateSettings,
+      body: {"is_notifications_allowed": isNotificationsEnabled ? 1 : 0},
+    );
   }
 }

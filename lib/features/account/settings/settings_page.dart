@@ -36,21 +36,32 @@ class SettingsPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                MenuItem(
-                  title: "notifications".tr,
-                  trailing: SizedBox(
-                    height: 30,
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: Switch.adaptive(
-                        value: true,
-                        onChanged: (val) {},
-                        activeColor: AppColors.primaryColor,
+                Obx(() {
+                  return MenuItem(
+                    title: "notifications".tr,
+                    trailing: SizedBox(
+                      height: 30,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Switch.adaptive(
+                          value: state.isNotificationsEnabled.value,
+                          onChanged: (val) => controller.updateNotificationSettings(val),
+                          activeColor: AppColors.white,
+                          trackColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.selected)) {
+                                return AppColors.primaryColor;
+                              }
+                              return AppColors.secondaryBorderColor;
+                            },
+                          ),
+                          activeTrackColor: AppColors.primaryColor.withOpacity(0.2),
+                        ),
                       ),
                     ),
-                  ),
-                  onTap: () {},
-                ),
+                    onTap: () {},
+                  );
+                }),
                 MenuItem(
                   title: "language".tr,
                   onTap: () {

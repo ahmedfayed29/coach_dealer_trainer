@@ -21,6 +21,7 @@ class UserModel extends BaseMappable {
   List<ImagesModel> images;
   List<WorkingDaysModel> workingDays;
   List<ShiftsModel> shifts;
+  bool isNotificationsAllowed;
 
   UserModel({
     required this.id,
@@ -41,6 +42,7 @@ class UserModel extends BaseMappable {
     required this.images,
     required this.workingDays,
     required this.shifts,
+    required this.isNotificationsAllowed,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -55,6 +57,7 @@ class UserModel extends BaseMappable {
         experienceYears: json["experience_years"],
         sessionsNumber: json["sessions_number"],
         traineesNumber: json["trainees_number"],
+        isNotificationsAllowed: json["is_notifications_allowed"] ?? false,
         bio: json["bio"],
         classPeriod: int.tryParse(json["class_period"].toString()) ?? 0,
         country: CountryModel.fromJson(json["country"]),
@@ -86,6 +89,7 @@ class UserModel extends BaseMappable {
         "sessions_number": sessionsNumber,
         "trainees_number": traineesNumber,
         "bio": bio,
+        "is_notifications_allowed": isNotificationsAllowed,
         "class_period": classPeriod,
         "country": country.toJson(),
         "sports": List<SportsModel>.from(sports.map((x) => x)),
@@ -107,6 +111,7 @@ class UserModel extends BaseMappable {
         experienceYears: json["experience_years"],
         sessionsNumber: json["sessions_number"],
         traineesNumber: json["trainees_number"],
+        isNotificationsAllowed: json["is_notifications_allowed"] ?? false,
         bio: json["bio"],
         classPeriod: json["class_period"],
         country: CountryModel.fromJson(json["country"]),
